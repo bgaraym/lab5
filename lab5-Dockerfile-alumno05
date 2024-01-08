@@ -1,0 +1,17 @@
+# Imagen Docker de la que parte
+FROM python:3.11-slim
+
+# Instalar librerías de Python necesarias
+RUN pip install jupyter
+RUN pip install numba
+RUN pip install numpy
+
+# Crear directorio app y establecerlo como actual
+RUN mkdir /app
+WORKDIR /app
+
+# Copiar archivo pi.ipynb a directorio actual de la imagen desde el directorio local
+COPY ./pi.ipynb /app
+
+# Comando por defecto
+CMD ["ipython", "/app/pi.ipynb", "100000"]
